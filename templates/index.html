@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Content -->
+
+<section>
+	<header class="main">
+		<h1>Phone Book</h1>
+	</header>
+
+	{% if messages %}
+	<ul class="messages">
+		{% for message in messages %}
+		<div class="alert alert-success" role="alert">{{ message }}</div>
+		{% endfor %}
+	</ul>
+	{% endif %}
+
+	<span class="image main"><img src="{% static 'images/PhoneBook.jpg' %}" style="width: 400px; height: 400px;" alt="" /></span>
+
+	<p>Find contacts around Kyrgyzstan</p>
+	<hr class="major" />
+	<div class="posts">
+		{% for person in page_obj %}
+		<article>
+			<a href="#" class="image"><img src="{{ person.get_image }}" style="width: 200px; height: 200px;" alt="" /></a>
+			<h3>{{ person }}</h3>
+			<p>{{ person.description }}</p>
+			<ul class="actions">
+				<li><a href="{% url 'detail' person.id %}" class="button">More</a></li>
+			</ul>
+		</article>
+		{% endfor %}
+	</div>
+
+</section>
+
+<nav aria-label="...">
+  <ul class="pagination pagination-sm">
+	  {% if page_obj.has_previous %}
+	  <li class="page-item"><a class="page-link" href="{% url 'home' %}?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
+	{% endif %}
+	<li class="page-item active" aria-current="page">
+	  <span class="page-link">{{ page_obj.number }}</span>
+	</li>
+		{% if page_obj.has_next %}
+	<li class="page-item"><a class="page-link" href="{% url 'home' %}?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
+	{% endif %}
+  </ul>
+</nav>
+
+{% endblock %}

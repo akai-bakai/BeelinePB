@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Content -->
+
+	<section>
+		<header class="main">
+			<h1>{{ person.contact }}</h1>
+		</header>
+
+		<span class="image main"><img src="{{ person.get_image }}" style="width: 500px; height: 500px;" alt="" /></span>
+
+		<p>Hired: {{ person.created }}</p>
+		<p>Boss: {{ person.user.username }}</p>
+
+		<hr class="major" />
+			{% for image in images %}
+			<img src="{{ image }}" style="width: 500px; height: 500px;" class="img-thumbnail" alt="...">
+			{% endfor %}
+
+		<h2>{{ person.description }}</h2>
+		<p>{{ person.description }}</p>
+		<a href="{% url 'update-person' person.id %}"><i class="fas fa-edit"></i></a>
+		<a href="{% url 'delete-person' person.id %}"><i class="fas fa-trash-alt"></i></a>
+	</section>
+
+
+{% endblock %}

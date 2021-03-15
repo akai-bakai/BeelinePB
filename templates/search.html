@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<h1>Search results:</h1>
+<div class="posts">
+    {% for person in persons %}
+    <article>
+        <a href="#" class="image"><img src="{{ person.get_image }}" style="width: 200px; height: 200px;" alt="" /></a>
+        <h3>{{ person }}</h3>
+        <p>{{ person.description|truncatewords:30 }}</p>
+        <ul class="actions">
+            <li><a href="{% url 'detail' person.id %}" class="button">More</a></li>
+        </ul>
+    </article>
+    {% endfor %}
+</div>
+
+
+
+
+
+
+
+
+{% endblock %}
